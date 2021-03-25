@@ -1,0 +1,30 @@
+- hosts: apache
+  tasks:
+  - name: "Installing httpd package"
+    package:
+      name: "httpd"
+      state: present
+  - name: "Copying the Webpage"
+    copy:
+      dest: "/var/www/html/index.html"
+      content: "Hello, My Webserver is running.  \n "
+
+  - service:
+      name: "httpd"
+      state: started
+
+  - hosts: haproxy
+  tasks:
+  - name: "Installing Haproxy"
+    package:
+         name: "haproxy"
+         state: present
+  - name: "Copy the configuration file"
+    template:
+       src: "/ansible_wp/haproxy.cfg"
+       dest: "/etc/haproxy/"
+  - name: "Start the services"
+    service:
+        name: "haproxy"
+        state: restarted
+
