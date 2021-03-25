@@ -1,0 +1,1 @@
+# ansible_playbook_Haproxy-update_from_configuration_file_dynamically_join_the_inventory_on_AWS
